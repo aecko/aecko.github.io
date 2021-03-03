@@ -3,7 +3,7 @@ var apiHistoryData;
 //charts
 var pieChartData;
 var lineGraphData = [];
-
+var worldIndexCharts =0;
 var datesCaptured = [];
 
 
@@ -24,11 +24,18 @@ grabDataFromAPI()
 function grabDataFromAPI(){
 	$.ajax(settings).done( function(data) {
 		apiData = data;
+		apiData.response.find((item, i) =>{
+			if(item.continent == "All"){
+				worldIndexCharts = i
+				changeTotalCases(worldIndexCharts)
+				changeTotalDeaths(worldIndexCharts)
+				changeTotalRecovered(worldIndexCharts)
+				changeTotalActive(worldIndexCharts)
+			}
+		})
+		console.log(apiData)
 		populateDataTable()
-		changeTotalCases()
-		changeTotalDeaths()
-		changeTotalRecovered()
-		changeTotalActive()
+
 		calculatePieChart();
 		getHistory();
 	})
@@ -79,10 +86,10 @@ function populateDataTable(){
 }
 
 function calculatePieChart(){
-	var totalCases = apiData.response[189].cases.total;
-	var activeCases = apiData.response[189].cases.active;
-	var totalDeaths = apiData.response[189].deaths.total;
-	var totalRecovered = apiData.response[189].cases.recovered;
+	var totalCases = apiData.response[worldIndexCharts].cases.total;
+	var activeCases = apiData.response[worldIndexCharts].cases.active;
+	var totalDeaths = apiData.response[worldIndexCharts].deaths.total;
+	var totalRecovered = apiData.response[worldIndexCharts].cases.recovered;
 
 	var percentDeath = Math.round(totalDeaths/totalCases * 10000)/100;
 	var percentActive = Math.round(activeCases/totalCases* 10000)/100;
@@ -120,6 +127,4 @@ function parseHistory(){
 		}
 	});
 	drawLineChart();
-	console.log(datesCaptured);
-	console.log(lineGraphData);
 }

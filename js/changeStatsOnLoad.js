@@ -3,26 +3,27 @@
 		return x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 	}
 
-	function changeTotalCases(){
+
+	function changeTotalCases(worldIndex){
 		var totalCasesWorld = document.getElementById('totalCasesWorld');
-		totalCasesWorld.innerHTML = numberWithCommas(apiData.response[189].cases.total);
+		totalCasesWorld.innerHTML = numberWithCommas(apiData.response[worldIndex].cases.total);
 
 	}
 
-	function changeTotalDeaths(){
+	function changeTotalDeaths(worldIndex){
 		var totalDeaths = document.getElementById('totalDeathsWorld');
-		totalDeaths.innerHTML = numberWithCommas(apiData.response[189].deaths.total);
+		totalDeaths.innerHTML = numberWithCommas(apiData.response[worldIndex].deaths.total);
 
 	}
 
-	function changeTotalRecovered(){
+	function changeTotalRecovered(worldIndex){
 		var totalRecovered = document.getElementById('totalRecoveredWorld');
-		totalRecovered.innerHTML = numberWithCommas(apiData.response[189].cases.recovered);
+		totalRecovered.innerHTML = numberWithCommas(apiData.response[worldIndex].cases.recovered);
 
 	}
 
-	function changeTotalActive(){
+	function changeTotalActive(worldIndex){
 		var totalActive = document.getElementById('totalActiveWorld');
-		totalActive.innerHTML = numberWithCommas(apiData.response[189].cases.active);
+		totalActive.innerHTML = numberWithCommas(apiData.response[worldIndex].cases.active);
 
 	}
