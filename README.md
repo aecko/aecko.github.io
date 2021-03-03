@@ -1,4 +1,4 @@
-# aecko.github.io
+# Covid-19 Statistics Website
 Website to display up-to-date statistics about Covid-19 worldwide
 
 ## API Data
